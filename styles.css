@@ -3,17 +3,17 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f2f2f2;
+    background: #031b5e;
 }
 
 /* Container principal */
 .container {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 20px auto 50px; 
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 /* Título principal */
@@ -29,25 +29,40 @@ a {
     color: #007BFF;
 }
 
-a:hover {
-    color: #0056b3;
-}
-
 /* Botão */
-button {
+.button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #007BFF;
     color: #fff;
     border: none;
     cursor: pointer;
-    text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    text-decoration: none; 
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 5px;
 }
 
 .button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+#excluir {
+    color: red;
+}
+
+#excluir2 {
+    margin-right: 15px; 
+}
+
+/* Botão container */
+.button-container {
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Tabela */
@@ -56,27 +71,33 @@ table {
     border-collapse: collapse;
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
-    padding: 12px;
-    text-align: left;
+    border-right: 1px solid #ddd;
+    padding: 12px 15px; 
     border-bottom: 1px solid #ddd;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
 }
 
 th {
     background-color: #f2f2f2;
+    text-align: center;
 }
 
 /* Formulários */
 form {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 50px auto 0; 
     background-color: #fff;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 label {
@@ -86,11 +107,11 @@ label {
 }
 
 input[type="text"], textarea {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); 
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
     box-sizing: border-box;
 }
 
@@ -101,11 +122,12 @@ input[type="submit"] {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 input[type="submit"]:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 /* Responsividade */
@@ -121,4 +143,18 @@ input[type="submit"]:hover {
     input[type="text"], textarea {
         width: 100%;
     }
+
+    th, td {
+        padding: 10px; 
+    }
+}
+
+.adicionar {
+    margin-right: 15px; 
+}
+
+
+.center {
+    justify-content: center;
+    text-align: center;
 }

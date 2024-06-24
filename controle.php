@@ -1,8 +1,13 @@
-<?php include 'db.php';
+<?php 
+include 'db.php';
 
+if(session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-if(!$_SESSION['email']){
+if(!isset($_SESSION['email'])){
     header('Location: index.php');
+    exit();
 }
 
 ?>
@@ -17,33 +22,54 @@ if(!$_SESSION['email']){
 <body>
     <div class="container">
         <h1>Gerenciamento de Produtos</h1>
-
-        <button>
-        <a href="create.php">Adicionar Novo Produto</a>
-        </button>
+        <div class="button-container">
+            <a href="create.php" class="button">Adicionar Novo Produto</a>
+        </div>
+        
         <table>
-       
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
             <tbody>
                 <?php
                 $sql = "SELECT * FROM produtos";
                 $resultado = $conn->query($sql);
-                while($linha = $resultado->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $linha['id']; ?></td>
-                    <td><?php echo $linha['nome']; ?></td>
-                    <td><?php echo $linha['descricao']; ?></td>
-                    <td>R$ <?php echo number_format($linha['preco'], 2, ',', '.'); ?></td>
-                    <td>
-                        <a href="edit.php?id=<?php echo $linha['id']; ?>" class="button">Editar</a>
-                        <a href="delete.php?id=<?php echo $linha['id']; ?>" class="button">Excluir</a>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
+
+                if ($resultado) {
+                    if ($resultado->num_rows > 0) {
+                        while($linha = $resultado->fetch_assoc()): ?>
+                        <tr>
+                            <td class="center"><?php echo htmlspecialchars($linha['id']); ?></td>
+                            <td class="center"><?php echo htmlspecialchars($linha['nome']); ?></td>
+                            <td class="center"><?php echo htmlspecialchars($linha['descricao']); ?></td> 
+                            <td class="center">R$ <?php echo number_format($linha['preco'], 2, ',', '.'); ?></td>
+                            <td class="center">
+                                <a href="edit.php?id=<?php echo htmlspecialchars($linha['id']); ?>" class="button">Editar</a>
+                                <a href="delete.php?id=<?php echo htmlspecialchars($linha['id']); ?>" class="button">Excluir</a>
+                            </td>
+                        </tr>
+                        <?php endwhile;
+                    } else {
+                        echo "<tr><td colspan='5' class='center'>Nenhum produto encontrado</td></tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5' class='center'>Erro ao executar a consulta: " . $conn->error . "</td></tr>";
+                }
+                ?>
             </tbody>
         </table>
-        <a href="report.php" class="button">Ver Relatório</a>
+        <div class="button-container">
+            <a href="report.php" class="button">Ver Relatório</a>
+        </div>
     </div>
 </body>
 </html>
 
 <?php $conn->close(); ?>
+
