@@ -17,8 +17,8 @@ body {
 }
 
 h1 {
+    color: #333;
     text-align: center;
-    color: #031b5e;
     margin-bottom: 20px;
 }
 
@@ -50,7 +50,7 @@ input:focus {
 
 button {
     padding: 12px 20px;
-    background-color: #031b5e;
+    background-color: #007BFF;;
     color: #fff;
     border: none;
     border-radius: 5px;
